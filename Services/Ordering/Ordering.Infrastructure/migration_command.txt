@@ -1,0 +1,3 @@
+Ordering.Infrastructure % dotnet ef migrations add Initial-Create --startup-project ../Ordering.API
+
+Firstly go into infra layer with help of cd command and then run rest with setting startup project

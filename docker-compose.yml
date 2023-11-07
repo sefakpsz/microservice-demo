@@ -1,0 +1,66 @@
+﻿services:
+  catalogdb:
+    image: mongo
+    
+  basketdb:
+    image: redis:alpine
+  
+  discountdb:
+    image: postgres
+    
+#  orderdb:
+#    # for macOS image: mcr.microsoft.com/azure-sql-edge
+#    image: mcr.microsoft.com/mssql/server:2022-latest
+  
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+  
+  portainer:
+    image: portainer/portainer-ce
+  
+  catalog.api:
+    image: catalog.api
+    build:
+      context: .
+      dockerfile: Services/Catalog/Catalog.API/Dockerfile
+      
+  basket.api:
+    image: basket.api
+    build:
+      context: .
+      dockerfile: Services/Basket/Basket.API/Dockerfile
+  
+  discount.api:
+    image: discount.api
+    build:
+      context: .
+      dockerfile: Services/Discount/Discount.API/Dockerfile
+      
+  discount.grpc:
+    image: discount.grpc
+    build:
+      context: .
+      dockerfile: Services/Discount/Discount.Grpc/Dockerfile
+      
+  ordering.api:
+    image: ordering.api
+    build:
+      context: .
+      dockerfile: Services/Ordering/Ordering.API/Dockerfile
+      
+  ocelotapigw:
+    image: ocelotapigw
+    build:
+      context: .
+      dockerfile: ApiGateways/OcelotApiGw/Dockerfile
+      
+  shopping.aggregator:
+    image: shoppingaggregator
+    build:
+      context: .
+      dockerfile: ApiGateways/Shopping.Aggregator/Dockerfile
+      
+volumes: 
+  mongo_data:
+  portainer_data:
+  postgres_data:
